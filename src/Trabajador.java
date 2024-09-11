@@ -7,12 +7,14 @@ public class Trabajador {
 private String nombre;
 private LocalDate fecha;
 private double salario;
+private int vacaciones;
 
 //Constructor
 public Trabajador() {
 	this.nombre = "Default";
-	this.fecha = fecha.now();
+	this.fecha = LocalDate.now();
 	this.salario = 0;
+	this.vacaciones = 0;
 }
 
 //Getters y Setters
@@ -30,10 +32,8 @@ public LocalDate getFecha() {
 }
 
 public void ingresarFecha() {
-	int anio = Integer.parseInt(JOptionPane.showInputDialog("Ingrese año"));
-	int mes = Integer.parseInt(JOptionPane.showInputDialog("Ingrese mes"));
-	int dia = Integer.parseInt(JOptionPane.showInputDialog("Ingrese dia"));
-	fecha = LocalDate.of(anio, mes, dia);
+	int anio = Integer.parseInt(JOptionPane.showInputDialog("Ingrese el año que ingreso: "));
+	fecha = LocalDate.ofYearDay(anio, 1);
 }
 
 public double getSalario() {
@@ -47,9 +47,32 @@ public void ingresarSalario() {
 	
 }
 
-public int calcularDiasDeVacaciones(LocalDate fecha) {
-	
-	return 0;
+public int calcularDiasDeVacaciones() {
+	LocalDate fechaActual = LocalDate.now();
+	for (int i = 0; i < ( fechaActual.getYear() - fecha.getYear()); i++) {
+		vacaciones += 7;
+	}
+	;
+	return vacaciones;
+}
+
+public int calcularAumentoSalarial() {
+	LocalDate fechaActual = LocalDate.now();
+	int salarioAumento = (int) salario;
+	for (int i = 0; i < ( fechaActual.getYear() - fecha.getYear()); i++) {
+		salarioAumento += 1000;
+	}
+	;
+	return salarioAumento;
+}
+
+public int calcularIndemnizacionDespido(){
+	LocalDate fechaActual = LocalDate.now();
+	int salarioIndeminizacion = 0;
+	int experiencia =  fechaActual.getYear() - fecha.getYear();
+	salarioIndeminizacion = (int) (salario * experiencia);
+	;
+	return salarioIndeminizacion;
 }
 
 }
