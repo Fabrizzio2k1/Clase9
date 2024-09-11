@@ -27,8 +27,8 @@ public void ingresarNombre() {
 	nombre = JOptionPane.showInputDialog("Ingrese el nombre del trabajador: ");
 }
 
-public LocalDate getFecha() {
-	return fecha;
+public int verFecha() {
+	return fecha.getYear();
 }
 
 public void ingresarFecha() {
